@@ -1,0 +1,8 @@
+DELETE FROM Phones
+WHERE PhoneID = 15
+
+DELETE FROM Manufactures 
+WHERE Manufacture ID = 2
+
+DELETE FROM Clients
+WHERE ClientID = 9203057522

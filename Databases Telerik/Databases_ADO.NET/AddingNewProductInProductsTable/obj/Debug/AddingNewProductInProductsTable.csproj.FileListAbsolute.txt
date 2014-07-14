@@ -1,0 +1,6 @@
+c:\users\alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\AddingNewProductInProductsTable\bin\Debug\AddingNewProductInProductsTable.exe.config
+c:\users\alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\AddingNewProductInProductsTable\bin\Debug\AddingNewProductInProductsTable.exe
+c:\users\alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\AddingNewProductInProductsTable\bin\Debug\AddingNewProductInProductsTable.pdb
+c:\users\alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\AddingNewProductInProductsTable\obj\Debug\AddingNewProductInProductsTable.csprojResolveAssemblyReference.cache
+c:\users\alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\AddingNewProductInProductsTable\obj\Debug\AddingNewProductInProductsTable.exe
+c:\users\alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\AddingNewProductInProductsTable\obj\Debug\AddingNewProductInProductsTable.pdb

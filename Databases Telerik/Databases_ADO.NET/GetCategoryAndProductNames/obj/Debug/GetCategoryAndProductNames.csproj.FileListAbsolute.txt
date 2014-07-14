@@ -1,0 +1,5 @@
+c:\users\alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\GetCategoryAndProductNames\bin\Debug\GetCategoryAndProductNames.exe.config
+c:\users\alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\GetCategoryAndProductNames\bin\Debug\GetCategoryAndProductNames.exe
+c:\users\alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\GetCategoryAndProductNames\bin\Debug\GetCategoryAndProductNames.pdb
+c:\users\alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\GetCategoryAndProductNames\obj\Debug\GetCategoryAndProductNames.exe
+c:\users\alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\GetCategoryAndProductNames\obj\Debug\GetCategoryAndProductNames.pdb

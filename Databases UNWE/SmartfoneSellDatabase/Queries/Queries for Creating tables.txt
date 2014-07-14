@@ -1,0 +1,54 @@
+CREATE TABLE Phones(
+PhoneID int NOT NULL,
+ManufactureID int NOT NULL,
+ModelName nvarchar(20) NOT NULL,
+DisplaySize float NOT NULL,
+Battery nvarchar(20) NOT NULL,
+Price money NOT NULL,
+CONSTRAINT PK_Phones PRIMARY KEY (PhoneID),
+CONSTRAINT FK_Phones_Manufactures FOREIGN KEY (ManufactureID)
+REFERENCES Manufactures(ManufactureID)
+
+CREATE TABLE Manufactures(
+ManufactureID int NOT NULL,
+ManufactureName nvarchar(20) NOT NULL,
+CONSTRAINT PK_Manufactures PRIMARY KEY (ManufactureID))
+
+CREATE TABLE Towns(
+TownID int NOT NULL,
+TownName nvarchar(20),
+CONSTRAINT PK_Towns PRIMARY KEY (TownID))
+
+CREATE TABLE Addresses(
+AddressID int NOT NULL,
+AddressText nvarchar(100) NOT NULL,
+TownID int NOT NULL,
+CONSTRAINT PK_Addresses PRIMARY KEY (AddressID),
+CONSTRAINT FK_Addresses_Towns FOREIGN KEY (TownID)
+REFERENCES Towns(TownID))
+
+CREATE TABLE Clients(
+ClientID bigint NOT NULL,
+ClientName nvarchar(50) NOT NULL,
+AddressID int NOT NULL,
+CONSTRAINT PK_Clients PRIMARY KEY (ClientID),
+CONSTRAINT FK_Clients_Addresses FOREIGN KEY (AddressID)
+REFERENCES Addresses(AddressID))
+
+CREATE TABLE Sells(
+SellID int NOT NULL,
+ClientID bigint NOT NULL,
+SellDate smalldatetime NOT NULL,
+CONSTRAINT PK_Sells PRIMARY KEY (SellID),
+CONSTRAINT FK_Sells_Clients FOREIGN KEY (ClientID)
+REFERENCES Clients(ClientID))
+
+CREATE TABLE PhoneSells(
+SellID int NOT NULL,
+PhoneID int NOT NULL,
+Quantity int NOT NULL,
+CONSTRAINT PK_PhoneSells PRIMARY KEY (SellID, PhoneID),
+CONSTRAINT FK_PhoneSells_Sells FOREIGN KEY (SellID)
+REFERENCES Sells(SellID),
+CONSTRAINT FK_PhoneSells_Phones FOREIGN KEY (PhoneID)
+REFERENCES Phones(PhoneID))

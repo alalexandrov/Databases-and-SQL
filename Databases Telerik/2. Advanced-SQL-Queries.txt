@@ -1,0 +1,181 @@
+1. Find the names and salaries of the employees that take the minimal salary in the company
+SELECT FirstName, Salary
+FROM Employees
+where Salary = (SELECT MIN(Salary) FROM Employees)
+
+2. Find the names and salaries of the employees that have a salary that is up to 10% higher than the minimal salary for the company
+SELECT FirstName, Salary
+FROM Employees
+where Salary > (SELECT MIN(Salary) FROM Employees)*1.1
+
+3. Find the full name, salary and department of the employees that take the minimal salary in their department
+SELECT FirstName + ' ' + LastName AS FullName, Salary, DepartmentID
+FROM Employees e
+WHERE Salary = (SELECT MIN(Salary) FROM Employees
+                WHERE DepartmentID = e.DepartmentID)
+
+4.Find the average salary in the department #1
+SELECT DepartmentID, AVG(Salary) AS [AverageSalary]
+FROM Employees 
+GROUP BY DepartmentID
+HAVING DepartmentID = 1
+
+5. Find the average salary  in the "Sales" department
+SELECT d.Name AS [Department Name], AVG(e.Salary) AS [Average Salary]
+FROM Employees e
+JOIN Departments d
+  ON e.DepartmentID = d.DepartmentID
+GROUP BY d.Name
+HAVING d.Name = 'Sales'
+
+6. Find the number of employees in the "Sales" department
+SELECT d.Name AS [Department Name], COUNT(e.EmployeeID) AS [Number of Employees]
+FROM Employees e
+JOIN Departments d
+  ON e.DepartmentID = d.DepartmentID
+GROUP BY d.Name
+HAVING d.Name = 'Sales'
+
+7. Find the number of all employees that have manager
+SELECT COUNT(EmployeeID) AS [Number of Employees that has a Manager]
+FROM Employees
+WHERE ManagerID IS NOT NULL
+
+8. Find the number of all employees that not have manager
+SELECT COUNT(EmployeeID) AS [Number of Employees that not has a Manager]
+FROM Employees
+WHERE ManagerID IS NULL
+
+9. Find all departments and the average salary for each of them
+SELECT d.Name, AVG(e.Salary) AS [Average Salary]
+FROM Employees e
+JOIN Departments d
+ON e.DepartmentID = d.DepartmentID
+GROUP BY d.Name
+
+10. Find the count of all employees in each department and for each town
+SELECT d.Name AS [Department], t.Name AS [Town], COUNT(e.EmployeeID) AS [Count of Employees]
+FROM Employees e
+JOIN Departments d
+ON e.DepartmentID = d.DepartmentID
+JOIN Addresses a
+ON a.AddressID = e.AddressID
+JOIN Towns t
+ON a.TownID = t.TownID
+GROUP BY d.Name, t.Name
+
+11. Find all managers that have exactly 5 employees
+SELECT m.FirstName + ' ' + m.LastName AS [Manager that has 5 employees]
+FROM Employees e
+JOIN Employees m
+ON e.ManagerID = m.EmployeeID
+GROUP BY m.FirstName + ' ' + m.LastName
+HAVING COUNT(e.EmployeeID) = 5
+
+11.1
+SELECT m.FirstName + ' ' + m.LastName AS [Manager that has 5 employees]
+FROM Employees m
+WHERE (SELECT COUNT(EmployeeID) FROM Employees
+       WHERE m.EmployeeID = ManagerID) = 5
+
+12. Find all employees along with their managers. For employees that do not have manager display the value "(no manager)"
+SELECT e.FirstName AS [Employee], COALESCE(m.FirstName, 'No Manager') AS [Manager]
+FROM Employees e
+LEFT JOIN Employees m
+ON e.ManagerID = m.EmployeeID
+
+13. Find the names of all employees whose last name is exactly 5 characters long
+SELECT FirstName, LastName AS [5 characters LastName]
+FROM Employees
+WHERE LEN(LastName) = 5
+
+14. Display the current date and time in the following format "day.month.year hour:minutes:seconds:milliseconds"
+SELECT CONVERT(VARCHAR(24), GETDATE(), 113)
+
+15. Create a table Users
+CREATE TABLE Users (
+UserID int IDENTITY PRIMARY KEY,
+UserName nvarchar(30) NOT NULL,
+Pass nvarchar(20) NOT NULL,
+FullName nvarchar(50) NOT NULL,
+LastLoginTime datetime NOT NULL,
+CONSTRAINT uc_UserName UNIQUE(UserName),
+CONSTRAINT ch_Pass CHECK(LEN(Pass) >= 5)
+)
+
+16. Create VIEW for Users
+CREATE VIEW [UsersView] AS
+SELECT * FROM Users
+
+17. Create table Groups
+CREATE TABLE Groups(
+GroupID int IDENTITY PRIMARY KEY,
+GroupName nvarchar(20) UNIQUE
+)
+
+18. Making Foreign Key in Users table
+ALTER TABLE Users
+ADD GroupID int
+CONSTRAINT FK_Users_Groups FOREIGN KEY(GroupID)
+REFERENCES Groups(GroupID)
+
+19. Inserting data in Groups and Users table
+INSERT INTO Groups(GroupName) VALUES
+('Group1'),
+('Group2'),
+('Group3'),
+('Group4')
+
+INSERT INTO Users(UserName,Pass,FullName,LastLoginTime) VALUES
+('Nasko', 12345,'Prasko', '12.12.12'),
+('Liubo', 12345,'Prasko', '12.12.12'),
+('Toncho', 12345,'Prasko', '12.12.12'),
+('Petko', 12345,'Prasko', '12.12.12')
+
+20. Update Tables Users and Groups
+UPDATE Users
+SET UserName = 'AlexanderSpecialist'
+WHERE UserName = 'Alexander'
+
+UPDATE Groups
+SET GroupName = 'Group1234'
+WHERE GroupName = 'Group3'
+
+21. Deleting Rows in Users and Groups
+DELETE FROM Users
+WHERE UserName = 'Nasko'
+
+DELETE FROM Groups
+WHERE GroupName = 'Group2'
+
+22. Insert in the Users table the names of all employees from the Employees
+INSERT INTO Users (UserName, Pass, FullName, LastLoginTime)
+SELECT SUBSTRING(FirstName,1,1) + LOWER(LastName), SUBSTRING(FirstName,1,1) + LOWER(LastName),FirstName + ' ' + LastName, NULL
+FROM Employees
+
+23. Changes the password to NULL for all users that have not been in the system since 10.03.2010
+UPDATE Users
+SET Pass = NULL
+WHERE LastLoginTime <= '10.03.2010'
+
+24. Deletes all users without passwords
+DELETE FROM Users
+WHERE Pass IS NULL
+
+25. Display the average employee salary by department and job title
+SELECT d.Name AS [Department Name], e.JobTitle AS [JobTitle], AVG(e.Salary) AS [Average Salary]
+FROM Employees e
+JOIN Departments d
+ON e.DepartmentID = d.DepartmentID
+GROUP BY d.Name, e.JobTitle
+ORDER BY AVG(Salary)
+
+26. Display the minimal employee salary by department and job title along with the name of some of the employees that take it
+SELECT d.Name AS [Department Name], e.JobTitle AS [JobTitle], MIN(e.Salary) AS [Min Salary], e.FirstName + ' ' + e.LastName AS [Employee Name]
+FROM Employees e
+JOIN Departments d
+ON e.DepartmentID = d.DepartmentID
+GROUP BY d.Name, e.JobTitle,e.FirstName + ' ' + e.LastName
+ORDER BY MIN(Salary)
+
+27. Display the town where maximal number of employees work

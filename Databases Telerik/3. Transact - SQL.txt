@@ -1,0 +1,158 @@
+1. Create Database and Tables, and store procedure that selects full names of all persons.
+CREATE DATABASE UserAccounts
+GO
+
+USE UserAccounts
+GO
+
+CREATE TABLE Persons(
+PersonID int IDENTITY PRIMARY KEY,
+FirstName varchar(20) NOT NULL,
+LastName varchar(20) NOT NULL,
+SSN int NOT NULL
+)
+GO
+
+CREATE TABLE Accounts(
+AccountId int IDENTITY PRIMARY KEY,
+PersonID int NOT NULL,
+Balance int NOT NULL
+CONSTRAINT fk_Accounts_Persons FOREIGN KEY (PersonID)
+REFERENCES Persons(PersonID)
+)
+GO
+
+INSERT INTO Persons(FirstName, LastName, SSN)
+VALUES
+('Alexander', 'Alexandrov', '123456789'),
+('Georgi', 'Hristov', '123456789'),
+('Pesho', 'Tarambushev', '123456789'),
+('Petko', 'Karaivanov', '123456789'),
+('Ivan', 'Vurbanov', '123456789')
+GO
+
+INSERT INTO Accounts(PersonID, Balance)
+VALUES
+(1,1234),
+(2,2630),
+(3,4254),
+(4,6234),
+(5,8254)
+GO
+
+CREATE PROC usp_FullNamesOfAllPersons
+AS
+SELECT FirstName + ' ' + LastName AS [Full Name]
+FROM Persons
+GO
+
+2. All persons who have more money in their accounts than the supplied number
+CREATE PROC usp_AllPersonsWithMoneyMoreThan (@Money int)
+AS
+SELECT p.FirstName + ' ' + p.LastName AS [Person], a.Balance
+FROM Persons p
+JOIN Accounts a
+ON p.PersonID = a.PersonID
+WHERE a.Balance > @Money
+GO
+
+3. Create function to calculate future value 
+CREATE FUNCTION fn_CalculateFutureValue (@Sum float, @YearlyInterest float, @Months float)
+RETURNS INT
+AS
+BEGIN
+DECLARE @FutureValue float, @Years float, @R float
+SET @Years = @Months / 12
+SET @R = @YearlyInterest / 100
+SET @FutureValue = @Sum * (POWER((1 + @R), @Years))
+RETURN @FutureValue
+END
+GO
+
+SELECT dbo.fn_CalculateFutureValue (100,6,60) AS [Future Value]
+
+4. Get interest for one month
+CREATE PROC usp_InterestForOneMonth 
+@AccountID int,
+@InterestRate int
+AS
+SELECT AccountId,Balance, dbo.fn_CalculateFutureValue(Balance,@InterestRate,1) AS [Furure Value For One Month]
+FROM Accounts
+WHERE @AccountID = AccountID
+
+5. Create store procedure WithDrawMoney
+CREATE PROC WithdrawMoney(@AccountId int, @Money int)
+AS
+DECLARE @AccountBalance int
+SELECT @AccountBalance = Balance
+FROM Accounts 
+WHERE @AccountId = AccountId
+IF(@AccountBalance >= @Money)
+BEGIN
+	UPDATE Accounts
+	SET Balance = Balance - @Money
+	WHERE AccountId = @AccountId
+END
+ELSE
+BEGIN
+	PRINT 'No enought money !'		
+END
+GO
+
+5.1 Create store procedure DepositMoney
+CREATE PROC DepositMoney
+@AccountID int,
+@Money int
+AS
+IF(@Money > 0)
+BEGIN
+	UPDATE Accounts
+	SET Balance = Balance + @Money
+	WHERE AccountId = @AccountID
+END
+ELSE
+BEGIN
+	PRINT 'Invalid value for money !' 
+END
+GO
+
+6. Create table Logs
+CREATE TABLE Logs(
+LogID int IDENTITY PRIMARY KEY,
+AccountID int NOT NULL,
+OldSum int NOT NULL,
+NewSum int NOT NULL,
+)
+
+6.1 Create trigger
+CREATE TRIGGER tr_AccountsUpdate ON Accounts FOR UPDATE
+AS
+INSERT INTO Logs(AccountID, OldSum, NewSum) 
+SELECT a.AccountId, d.Balance, a.Balance  
+FROM Accounts a
+JOIN deleted d
+ON a.AccountId = d.AccountId
+
+7. 
+ALTER FUNCTION fn_NamesAndTownsWith (@input nvarchar(50))
+RETURNS @tbl_Employees TABLE
+(EmployeeName nvarchar(50) NOT NULL,
+TownName nvarchar(50) NOT NULL)
+AS
+BEGIN
+DECLARE @LEN int = LEN(@input)
+DECLARE @Count int = 0
+	WHILE (@Count < @LEN)
+	BEGIN
+		INSERT INTO @tbl_Employees
+		SELECT FirstName AS [Employee], t.Name AS [Town]
+		FROM Employees e
+		JOIN Addresses a
+		ON e.AddressID = a.AddressID
+		JOIN Towns t
+		ON a.TownID = t.TownID
+		WHERE e.FirstName LIKE ('%' + SUBSTRING(@input, @Count, 1) + '%')
+		SET @Count = @Count + 1		
+	END
+	RETURN
+END

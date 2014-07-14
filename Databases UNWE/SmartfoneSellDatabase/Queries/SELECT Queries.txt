@@ -1,0 +1,61 @@
+SELECT PhoneID,ModelName, Battery
+FROM Phones
+
+SELECT PhoneID, ManufactureID, ModelName
+FROM Phones
+WHERE Price > 700
+
+SELECT PhoneID, ManufactureID, ModelName, DisplaySize
+FROM Phones
+WHERE DisplaySize > 4
+
+SELECT PhoneID, ManufactureID, ModelName, DisplaySize
+FROM Phones
+WHERE DisplaySize > 4 AND ManufactureID = 2
+ORDER BY PhoneID
+
+SELECT PhoneID, ManufactureID, ModelName, Price
+FROM Phones
+WHERE ModelName LIKE 'Galaxy%'
+
+SELECT P.PhoneID, M.ManufactureName, P.ModelName, P.Price 
+FROM Phones P JOIN Manufactures M
+ON P.ManufactureID = M.ManufactureID
+WHERE P.Price > 400
+
+SELECT M.ManufactureName, MAX(P.Price) AS [MaxPrice]
+FROM Phones P JOIN Manufactures M
+ON P.ManufactureID = M.ManufactureID
+GROUP BY M.ManufactureName
+ORDER BY M.ManufactureName
+
+SELECT Ph.SellID,Ph.PhoneID, P.ModelName, P.DisplaySize, P.Price, Ph.Quantity
+FROM PhoneSells Ph JOIN Phones P
+ON P.PhoneID = Ph.PhoneID
+WHERE Ph.Quantity = 1 AND P.Price > 500
+
+SELECT Ph.PhoneID, M.ManufactureName, P.ModelName, P.Price*Ph.Quantity AS [All], Ph.Quantity
+FROM PhoneSells Ph 
+JOIN Phones P
+ON P.PhoneID = Ph.PhoneID
+JOIN Manufactures M
+ON P.ManufactureID = M.ManufactureID
+
+SELECT Ph.PhoneID, P.ModelName, SUM(P.Price*Ph.Quantity) AS [All]
+FROM PhoneSells Ph 
+JOIN Phones P
+ON P.PhoneID = Ph.PhoneID
+WHERE P.Price > 500
+GROUP BY Ph.PhoneID, P.ModelName
+ORDER BY SUM(P.Price * Quantity)
+
+SELECT S.SellID, C.ClientName, S.SellDate, T.TownName
+FROM Sells S 
+JOIN Clients C
+ON S.ClientID = C.ClientID
+JOIN Addresses A
+ON A.AddressID = C.AddressID
+JOIN Towns T
+ON T.TownID = A.TownID
+WHERE T.TownID = 6000
+ORDER BY S.SellDate DESC

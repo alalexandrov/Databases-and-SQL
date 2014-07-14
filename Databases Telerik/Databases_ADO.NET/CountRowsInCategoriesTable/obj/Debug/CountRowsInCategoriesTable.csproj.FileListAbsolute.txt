@@ -1,0 +1,6 @@
+c:\users\alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\CountRowsInCategoriesTable\bin\Debug\CountRowsInCategoriesTable.exe.config
+c:\users\alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\CountRowsInCategoriesTable\bin\Debug\CountRowsInCategoriesTable.exe
+c:\users\alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\CountRowsInCategoriesTable\bin\Debug\CountRowsInCategoriesTable.pdb
+c:\users\alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\CountRowsInCategoriesTable\obj\Debug\CountRowsInCategoriesTable.csprojResolveAssemblyReference.cache
+c:\users\alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\CountRowsInCategoriesTable\obj\Debug\CountRowsInCategoriesTable.exe
+c:\users\alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\CountRowsInCategoriesTable\obj\Debug\CountRowsInCategoriesTable.pdb

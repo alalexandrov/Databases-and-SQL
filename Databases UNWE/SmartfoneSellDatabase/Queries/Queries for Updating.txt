@@ -1,0 +1,11 @@
+UPDATE Phones
+SET Price = Price * 1.2
+WHERE ManufactureID = 1
+
+UPDATE Clients
+SET Address ID = 10
+WHERE ClientID = 9203057510
+
+Update PhoneSells
+SET Quantity = 3
+WHERE SellID = 10000009

@@ -1,0 +1,5 @@
+c:\users\alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\ReadInfoFromExcelFile\bin\Debug\ReadInfoFromExcelFile.exe.config
+c:\users\alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\ReadInfoFromExcelFile\bin\Debug\ReadInfoFromExcelFile.exe
+c:\users\alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\ReadInfoFromExcelFile\bin\Debug\ReadInfoFromExcelFile.pdb
+c:\users\alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\ReadInfoFromExcelFile\obj\Debug\ReadInfoFromExcelFile.exe
+c:\users\alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\ReadInfoFromExcelFile\obj\Debug\ReadInfoFromExcelFile.pdb

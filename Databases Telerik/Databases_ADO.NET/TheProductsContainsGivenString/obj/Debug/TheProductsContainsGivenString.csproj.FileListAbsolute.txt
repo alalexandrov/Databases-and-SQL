@@ -1,0 +1,6 @@
+C:\Users\Alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\TheProductsContainsGivenString\bin\Debug\TheProductsContainsGivenString.exe.config
+C:\Users\Alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\TheProductsContainsGivenString\bin\Debug\TheProductsContainsGivenString.exe
+C:\Users\Alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\TheProductsContainsGivenString\bin\Debug\TheProductsContainsGivenString.pdb
+C:\Users\Alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\TheProductsContainsGivenString\obj\Debug\TheProductsContainsGivenString.csprojResolveAssemblyReference.cache
+C:\Users\Alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\TheProductsContainsGivenString\obj\Debug\TheProductsContainsGivenString.exe
+C:\Users\Alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\TheProductsContainsGivenString\obj\Debug\TheProductsContainsGivenString.pdb

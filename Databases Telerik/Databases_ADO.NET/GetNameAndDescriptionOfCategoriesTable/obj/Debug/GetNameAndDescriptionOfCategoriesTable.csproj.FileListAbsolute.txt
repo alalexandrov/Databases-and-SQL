@@ -1,0 +1,5 @@
+c:\users\alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\GetNameAndDescriptionOfCategoriesTable\bin\Debug\GetNameAndDescriptionOfCategoriesTable.exe.config
+c:\users\alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\GetNameAndDescriptionOfCategoriesTable\bin\Debug\GetNameAndDescriptionOfCategoriesTable.exe
+c:\users\alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\GetNameAndDescriptionOfCategoriesTable\bin\Debug\GetNameAndDescriptionOfCategoriesTable.pdb
+c:\users\alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\GetNameAndDescriptionOfCategoriesTable\obj\Debug\GetNameAndDescriptionOfCategoriesTable.exe
+c:\users\alexander\documents\visual studio 2012\Projects\Databases_ADO.NET\GetNameAndDescriptionOfCategoriesTable\obj\Debug\GetNameAndDescriptionOfCategoriesTable.pdb
